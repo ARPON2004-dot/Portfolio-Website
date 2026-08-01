@@ -764,3 +764,7 @@ section:last-of-type{
     font-weight:bold;
 
 }
+section{
+    padding:80px 10%;
+    scroll-margin-top:100px;
+}
