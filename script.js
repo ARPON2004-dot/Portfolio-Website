@@ -77,65 +77,48 @@ hiddenElements.forEach(el => observer.observe(el));
 
 // ===== Active Navbar =====
 
-const sections = document.querySelectorAll("section");
-const navItems = document.querySelectorAll(".nav-links a");
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll(".nav-links a");
+
+navLinks.forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        navMenu.classList.remove("active");
+
+    });
+
+});
 
 window.addEventListener("scroll", () => {
 
-    let current = "";
+    let currentSection = "";
 
-    sections.forEach(section => {
+    sections.forEach((section) => {
 
-        const sectionTop = section.offsetTop - 120;
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.offsetHeight;
 
-        if (window.scrollY >= sectionTop) {
-            current = section.getAttribute("id");
+        if (
+            window.pageYOffset >= sectionTop &&
+            window.pageYOffset < sectionTop + sectionHeight
+        ) {
+            currentSection = section.getAttribute("id");
         }
 
     });
 
-    navItems.forEach(link => {
+    navLinks.forEach((link) => {
 
         link.classList.remove("active");
 
-        if (link.getAttribute("href") === "#" + current) {
+        if (link.getAttribute("href") === "#" + currentSection) {
             link.classList.add("active");
         }
 
     });
 
 });
-// ===== Back To Top =====
-
-const topBtn = document.getElementById("topBtn");
-
-window.addEventListener("scroll", () => {
-
-    if(window.scrollY > 300){
-
-        topBtn.style.display = "block";
-
-    }
-
-    else{
-
-        topBtn.style.display = "none";
-
-    }
-
-});
-
-topBtn.onclick = () => {
-
-    window.scrollTo({
-
-        top:0,
-
-        behavior:"smooth"
-
-    });
-
-};
 // ===== Scroll Progress Bar =====
 
 window.addEventListener("scroll", () => {
@@ -148,7 +131,52 @@ window.addEventListener("scroll", () => {
 
     const progress = (scrollTop / scrollHeight) * 100;
 
-    document.getElementById("progress-bar").style.width =
-        progress + "%";
+    const progressBar = document.getElementById("progress-bar");
+
+if(progressBar){
+    progressBar.style.width = progress + "%";
+}
 
 });
+// ===== Close Menu After Click =====
+
+navLinks.forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        navMenu.classList.remove("active");
+
+    });
+
+});
+// ===== EmailJS =====
+
+const contactForm = document.getElementById("contact-form");
+
+if (contactForm) {
+
+    contactForm.addEventListener("submit", function (e) {
+
+        e.preventDefault();
+
+        emailjs.sendForm(
+            "service_b6dpjsb",
+            "template_klafq09",
+            this
+        )
+        .then(() => {
+
+            alert("Message Sent Successfully!");
+            contactForm.reset();
+
+        })
+        .catch((error) => {
+
+            console.log(error);
+            alert(error.text);
+
+        });
+
+    });
+
+}
