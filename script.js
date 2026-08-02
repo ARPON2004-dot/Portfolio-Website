@@ -49,6 +49,7 @@ type();
 // ===== Mobile Menu =====
 
 const menuBtn = document.querySelector(".menu-btn");
+const navLinks = document.querySelectorAll(".nav-links a");
 const navMenu = document.querySelector(".nav-links");
 
 menuBtn.onclick = () => {
@@ -78,17 +79,6 @@ hiddenElements.forEach(el => observer.observe(el));
 // ===== Active Navbar =====
 
 const sections = document.querySelectorAll("section[id]");
-const navLinks = document.querySelectorAll(".nav-links a");
-
-navLinks.forEach(link => {
-
-    link.addEventListener("click", () => {
-
-        navMenu.classList.remove("active");
-
-    });
-
-});
 
 window.addEventListener("scroll", () => {
 
@@ -96,14 +86,14 @@ window.addEventListener("scroll", () => {
 
     sections.forEach((section) => {
 
-        const sectionTop = section.offsetTop - 100;
+        const sectionTop = section.offsetTop - 150;
         const sectionHeight = section.offsetHeight;
 
         if (
-            window.pageYOffset >= sectionTop &&
-            window.pageYOffset < sectionTop + sectionHeight
+            window.scrollY >= sectionTop &&
+            window.scrollY < sectionTop + sectionHeight
         ) {
-            currentSection = section.getAttribute("id");
+            currentSection = section.id;
         }
 
     });
@@ -179,4 +169,54 @@ if (contactForm) {
 
     });
 
+}
+const progressBars = document.querySelectorAll(".progress-bar");
+
+const progressObserver = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+            entry.target.style.width = entry.target.dataset.width;
+
+        }
+
+    });
+
+}, { threshold: 0.5 });
+
+progressBars.forEach(bar => progressObserver.observe(bar));
+const topBtn = document.getElementById("topBtn");
+
+if (topBtn) {
+
+    window.addEventListener("scroll", () => {
+
+        if (window.scrollY > 300) {
+            topBtn.classList.add("show");
+        } else {
+            topBtn.classList.remove("show");
+        }
+
+    });
+
+    topBtn.addEventListener("click", () => {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    });
+
+}
+// ===== Cursor Glow =====
+const glow = document.querySelector(".cursor-glow");
+
+if (glow) {
+    document.addEventListener("mousemove", (e) => {
+        glow.style.left = e.clientX + "px";
+        glow.style.top = e.clientY + "px";
+    });
 }
