@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://arpon2004-dot.github.io/Portfolio-Website/sitemap.xml
