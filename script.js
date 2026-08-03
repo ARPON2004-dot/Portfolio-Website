@@ -148,24 +148,51 @@ if (contactForm) {
     contactForm.addEventListener("submit", function (e) {
 
         e.preventDefault();
+const submitBtn = contactForm.querySelector("button");
 
+submitBtn.disabled = true;
+submitBtn.innerHTML = "Sending...";
         emailjs.sendForm(
             "service_b6dpjsb",
             "template_klafq09",
             this
         )
-        .then(() => {
+       .then(() => {
 
-            alert("Message Sent Successfully!");
-            contactForm.reset();
+    // Auto Reply Email
+    emailjs.send(
+        "service_b6dpjsb",
+        "template_5vkem09",
+        {
+            name: contactForm.name.value,
+            email: contactForm.email.value,
+            subject: contactForm.subject.value,
+            message: contactForm.message.value
+        }
+    );
 
-        })
+    submitBtn.innerHTML = "✓ Message Sent";
+
+    contactForm.reset();
+
+    setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = "Send Message";
+    }, 2500);
+
+})
         .catch((error) => {
 
-            console.log(error);
-            alert(error.text);
+    console.log(error);
 
-        });
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = "❌ Failed";
+
+    setTimeout(() => {
+        submitBtn.innerHTML = "Send Message";
+    }, 2500);
+
+});
 
     });
 

@@ -374,6 +374,11 @@ nav{
     font-size:20px;
     font-weight:600;
 }
+.skill span i{
+    color:#38bdf8;
+    margin-right:10px;
+    font-size:22px;
+}
 
 .progress{
     width:100%;
