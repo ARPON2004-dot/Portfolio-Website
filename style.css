@@ -849,3 +849,70 @@ section{
     opacity:0;
     visibility:hidden;
 }
+/* ===== Mobile Responsive ===== */
+
+@media(max-width:768px){
+
+    .hero{
+        flex-direction:column;
+        text-align:center;
+        padding:120px 20px 50px;
+    }
+
+    .hero-text{
+        max-width:100%;
+    }
+
+    .hero-text h1{
+        font-size:40px;
+    }
+
+    .hero-text h2{
+        font-size:22px;
+    }
+
+    .typing{
+        font-size:24px;
+    }
+
+    .hero-image{
+        margin-top:40px;
+    }
+
+    .hero-image img{
+        width:280px;
+        height:280px;
+    }
+
+    .social-icons{
+        justify-content:center;
+    }
+
+    .about{
+        flex-direction:column;
+        padding:70px 20px;
+        text-align:center;
+        gap:40px;
+    }
+
+    .about-image img{
+        width:250px;
+        height:250px;
+    }
+
+    .skills,
+    .projects,
+    .education,
+    .contact{
+        padding:70px 20px;
+    }
+
+    .section-title{
+        font-size:32px;
+    }
+
+    .project-container{
+        grid-template-columns:1fr;
+    }
+
+}

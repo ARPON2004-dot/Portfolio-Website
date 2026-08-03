@@ -1,49 +1,4 @@
-// ===== Typing Effect =====
 
-const words = [
-    "C++ Developer",
-    "Web Developer",
-    "CSE Student",
-    "Problem Solver"
-];
-
-let wordIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-
-function type() {
-
-    const currentWord = words[wordIndex];
-
-    if (!isDeleting) {
-        charIndex++;
-    } else {
-        charIndex--;
-    }
-
-    document.getElementById("typing-text").textContent =
-        currentWord.substring(0, charIndex);
-
-    let speed = isDeleting ? 80 : 150;
-
-    if (!isDeleting && charIndex === currentWord.length) {
-        speed = 1500;
-        isDeleting = true;
-    }
-
-    if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        wordIndex++;
-
-        if (wordIndex === words.length) {
-            wordIndex = 0;
-        }
-    }
-
-    setTimeout(type, speed);
-}
-
-type();
 
 
 // ===== Mobile Menu =====
