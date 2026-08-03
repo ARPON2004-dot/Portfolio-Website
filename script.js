@@ -247,3 +247,28 @@ if (glow) {
         glow.style.top = e.clientY + "px";
     });
 }
+window.addEventListener("load", () => {
+
+    const preloader = document.getElementById("preloader");
+
+    if (preloader) {
+        preloader.classList.add("hide");
+    }
+
+});
+if (document.getElementById("typing-text")) {
+
+    new Typed("#typing-text", {
+        strings: [
+            "Computer Science Student",
+            "Frontend Web Developer",
+            "C++ Programmer",
+            "Problem Solver"
+        ],
+        typeSpeed: 70,
+        backSpeed: 40,
+        backDelay: 1500,
+        loop: true
+    });
+
+}
